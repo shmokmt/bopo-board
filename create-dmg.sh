@@ -3,11 +3,11 @@
 set -e
 
 APP_NAME="BopoBoard"
-VERSION="1.0"
+VERSION="${VERSION:-1.0}"
 DMG_NAME="${APP_NAME}-${VERSION}.dmg"
 VOLUME_NAME="${APP_NAME} ${VERSION}"
 
-echo "📦 Creating DMG package for ${APP_NAME}..."
+echo "📦 Creating DMG package for ${APP_NAME} ${VERSION}..."
 
 # Check if app exists
 if [ ! -d "${APP_NAME}.app" ]; then
@@ -26,9 +26,6 @@ cp -R "${APP_NAME}.app" "${TMP_DIR}/"
 # Create symbolic link to Applications folder
 echo "🔗 Creating Applications symlink..."
 ln -s /Applications "${TMP_DIR}/Applications"
-
-# Optional: Add README or background image
-# cp README.md "${TMP_DIR}/"
 
 # Remove old DMG if exists
 if [ -f "${DMG_NAME}" ]; then
@@ -49,17 +46,9 @@ hdiutil create \
 echo "🧹 Cleaning up..."
 rm -rf "${TMP_DIR}"
 
-# Get file size
 DMG_SIZE=$(du -h "${DMG_NAME}" | cut -f1)
 
 echo ""
 echo "✅ DMG package created successfully!"
 echo "📦 File: ${DMG_NAME}"
 echo "💾 Size: ${DMG_SIZE}"
-echo ""
-echo "To test the DMG:"
-echo "  open ${DMG_NAME}"
-echo ""
-echo "To distribute:"
-echo "  1. Test installation on a clean macOS system"
-echo "  2. Upload to GitHub Releases or your distribution server"
