@@ -1,0 +1,40 @@
+# Xcode
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+*.xcworkspace/*
+!*.xcworkspace/contents.xcworkspacedata
+!*.xcworkspace/xcshareddata/
+
+# Build
+build/
+DerivedData/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Command-line build output
+BopoBoard.app/
+BopoBoardApp
+
+# Distribution packages
+*.dmg
+
+# Swift Package Manager
+.build/
+Packages/
+Package.resolved
+
+# User-specific
+xcuserdata/
+*.moved-aside
+*.perspectivev3
+
+# macOS
+.DS_Store
+
+# AppCode
+.idea/
+
+# Claude Code
+.claude/
