@@ -1,7 +1,8 @@
 import Foundation
 import CoreGraphics
 
-struct KeyPress: Identifiable, Equatable {
+// Renamed from KeyPress to avoid conflict with SwiftUI.KeyPress (macOS 14+)
+struct KeyPressEvent: Identifiable, Equatable {
     let id: UUID
     let keyCode: CGKeyCode
     let character: String

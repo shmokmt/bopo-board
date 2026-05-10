@@ -1,31 +1,22 @@
-//
-//  KeyboardState.swift
-//  BopoBoard
-//
-//  Observable state for keyboard monitoring
-//
-
 import Foundation
 import Combine
 import CoreGraphics
-#if canImport(BopoBoardCore)
+#if SWIFT_PACKAGE
 import BopoBoardCore
 #endif
 
 @MainActor
 class KeyboardState: ObservableObject {
-    @Published var currentKeyPress: KeyPress?
+    @Published var currentKeyPress: KeyPressEvent?
     @Published var modifierKeys: ModifierKeys = ModifierKeys()
     @Published var isMonitoring: Bool = false
-    @Published var keyHistory: [KeyPress] = []
+    @Published var keyHistory: [KeyPressEvent] = []
 
     private let maxHistoryCount = 10
 
-    /// Update the current key press
-    func updateCurrentKey(_ keyPress: KeyPress?) {
+    func updateCurrentKey(_ keyPress: KeyPressEvent?) {
         self.currentKeyPress = keyPress
 
-        // Add to history if not nil
         if let keyPress = keyPress {
             keyHistory.insert(keyPress, at: 0)
             if keyHistory.count > maxHistoryCount {
@@ -34,17 +25,14 @@ class KeyboardState: ObservableObject {
         }
     }
 
-    /// Update modifier keys state
     func updateModifiers(_ modifiers: ModifierKeys) {
         self.modifierKeys = modifiers
     }
 
-    /// Clear current key press
     func clearCurrentKey() {
         self.currentKeyPress = nil
     }
 
-    /// Clear history
     func clearHistory() {
         self.keyHistory.removeAll()
     }

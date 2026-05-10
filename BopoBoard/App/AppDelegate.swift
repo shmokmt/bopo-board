@@ -8,7 +8,7 @@
 import AppKit
 import SwiftUI
 import os.log
-#if canImport(BopoBoardCore)
+#if SWIFT_PACKAGE
 import BopoBoardCore
 #endif
 

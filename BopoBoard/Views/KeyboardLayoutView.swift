@@ -7,7 +7,7 @@
 
 import SwiftUI
 import CoreGraphics
-#if canImport(BopoBoardCore)
+#if SWIFT_PACKAGE
 import BopoBoardCore
 #endif
 

@@ -9,7 +9,7 @@ import Foundation
 import CoreGraphics
 import AppKit
 import os.log
-#if canImport(BopoBoardCore)
+#if SWIFT_PACKAGE
 import BopoBoardCore
 #endif
 
@@ -119,7 +119,7 @@ class KeyboardMonitor {
         let modifiers = ModifierKeys(from: flags)
         let (keyName, symbol) = keyCodeMapper.character(for: keyCode, modifiers: modifiers)
 
-        let keyPress = KeyPress(
+        let keyPress = KeyPressEvent(
             keyCode: keyCode,
             character: keyName,
             symbol: symbol,

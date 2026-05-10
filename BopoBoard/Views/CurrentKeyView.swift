@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
-#if canImport(BopoBoardCore)
+#if SWIFT_PACKAGE
 import BopoBoardCore
 #endif
 
 struct CurrentKeyView: View {
-    let keyPress: KeyPress?
+    let keyPress: KeyPressEvent?
 
     var body: some View {
         VStack(spacing: 12) {
