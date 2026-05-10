@@ -2,15 +2,15 @@ import Foundation
 import CoreGraphics
 
 // Renamed from KeyPress to avoid conflict with SwiftUI.KeyPress (macOS 14+)
-struct KeyPressEvent: Identifiable, Equatable {
-    let id: UUID
-    let keyCode: CGKeyCode
-    let character: String
-    let symbol: String?
-    let modifiers: ModifierKeys
-    let timestamp: Date
+public struct KeyPressEvent: Identifiable, Equatable {
+    public let id: UUID
+    public let keyCode: CGKeyCode
+    public let character: String
+    public let symbol: String?
+    public let modifiers: ModifierKeys
+    public let timestamp: Date
 
-    init(
+    public init(
         id: UUID = UUID(),
         keyCode: CGKeyCode,
         character: String,
@@ -26,7 +26,7 @@ struct KeyPressEvent: Identifiable, Equatable {
         self.timestamp = timestamp
     }
 
-    var displayText: String {
+    public var displayText: String {
         if modifiers.hasAnyModifier {
             return "\(modifiers.description) \(symbol ?? character)"
         } else {
@@ -34,7 +34,7 @@ struct KeyPressEvent: Identifiable, Equatable {
         }
     }
 
-    var shortDescription: String {
+    public var shortDescription: String {
         return "Key: \(character)" + (symbol != nil ? " → \(symbol!)" : "")
     }
 }

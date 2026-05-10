@@ -1,7 +1,7 @@
 import CoreGraphics
 
-class KeyCodeMapper {
-    static let shared = KeyCodeMapper()
+public class KeyCodeMapper {
+    public static let shared = KeyCodeMapper()
 
     private init() {}
 
@@ -42,7 +42,7 @@ class KeyCodeMapper {
         115: "Home", 116: "Page Up", 119: "End", 121: "Page Down"
     ]
 
-    func character(for keyCode: CGKeyCode, modifiers: ModifierKeys) -> (key: String, symbol: String?) {
+    public func character(for keyCode: CGKeyCode, modifiers: ModifierKeys) -> (key: String, symbol: String?) {
         if let special = specialKeyMap[keyCode] {
             return (special, nil)
         }
@@ -51,20 +51,20 @@ class KeyCodeMapper {
         return (physicalKey, zhuyinSymbol)
     }
 
-    func zhuyinSymbol(for keyCode: CGKeyCode) -> String? {
+    public func zhuyinSymbol(for keyCode: CGKeyCode) -> String? {
         return zhuyinKeyMap[keyCode]
     }
 
-    func isKnownKey(_ keyCode: CGKeyCode) -> Bool {
+    public func isKnownKey(_ keyCode: CGKeyCode) -> Bool {
         return baseKeyMap[keyCode] != nil || specialKeyMap[keyCode] != nil
     }
 
-    var allKeyCodes: [CGKeyCode] {
+    public var allKeyCodes: [CGKeyCode] {
         let allKeys = Set(baseKeyMap.keys).union(Set(specialKeyMap.keys))
         return Array(allKeys).sorted()
     }
 
-    func validateMappings() -> Bool {
+    public func validateMappings() -> Bool {
         guard zhuyinKeyMap.count >= 30 else { return false }
 
         // Note: duplicate values are intentional in Daqian layout
@@ -77,7 +77,7 @@ class KeyCodeMapper {
         return true
     }
 
-    var mappingStats: String {
+    public var mappingStats: String {
         """
         Zhuyin Keyboard Mapping Statistics:
         - Physical keys: \(baseKeyMap.count)
