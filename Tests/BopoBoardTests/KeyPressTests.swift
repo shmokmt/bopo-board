@@ -46,15 +46,15 @@ final class KeyPressTests: XCTestCase {
     func testEqualityWithSameIDAndTimestamp() {
         let id = UUID()
         let timestamp = Date()
-        let a = KeyPressEvent(id: id, keyCode: 0, character: "A", timestamp: timestamp)
-        let b = KeyPressEvent(id: id, keyCode: 0, character: "A", timestamp: timestamp)
-        XCTAssertEqual(a, b)
+        let lhs = KeyPressEvent(id: id, keyCode: 0, character: "A", timestamp: timestamp)
+        let rhs = KeyPressEvent(id: id, keyCode: 0, character: "A", timestamp: timestamp)
+        XCTAssertEqual(lhs, rhs)
     }
 
     func testInequalityWithDifferentID() {
-        let a = KeyPressEvent(keyCode: 0, character: "A")
-        let b = KeyPressEvent(keyCode: 0, character: "A")
-        XCTAssertNotEqual(a, b) // Different UUIDs
+        let lhs = KeyPressEvent(keyCode: 0, character: "A")
+        let rhs = KeyPressEvent(keyCode: 0, character: "A")
+        XCTAssertNotEqual(lhs, rhs) // Different UUIDs
     }
 
     func testDefaultModifiersHaveNoModifiers() {

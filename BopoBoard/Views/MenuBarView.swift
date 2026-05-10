@@ -85,16 +85,16 @@ struct MenuBarView: View {
                 .labelsHidden()
             }
 
-            Button(action: { showSettings.toggle() }) {
+            Button(action: { showSettings.toggle() }, label: {
                 Image(systemName: "gearshape")
                     .font(.title3)
-            }
+            })
             .buttonStyle(.plain)
 
-            Button(action: { NSApplication.shared.terminate(nil) }) {
+            Button(action: { NSApplication.shared.terminate(nil) }, label: {
                 Image(systemName: "xmark.circle")
                     .font(.title3)
-            }
+            })
             .buttonStyle(.plain)
         }
         .padding()

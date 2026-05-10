@@ -54,14 +54,14 @@ final class ModifierKeysTests: XCTestCase {
     }
 
     func testEquality() {
-        let a = ModifierKeys(shift: true, control: false)
-        let b = ModifierKeys(shift: true, control: false)
-        XCTAssertEqual(a, b)
+        let lhs = ModifierKeys(shift: true, control: false)
+        let rhs = ModifierKeys(shift: true, control: false)
+        XCTAssertEqual(lhs, rhs)
     }
 
     func testInequality() {
-        let a = ModifierKeys(shift: true)
-        let b = ModifierKeys(control: true)
-        XCTAssertNotEqual(a, b)
+        let lhs = ModifierKeys(shift: true)
+        let rhs = ModifierKeys(control: true)
+        XCTAssertNotEqual(lhs, rhs)
     }
 }

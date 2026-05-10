@@ -40,7 +40,7 @@ class KeyboardMonitor {
             place: .headInsertEventTap,
             options: .defaultTap,
             eventsOfInterest: eventMask,
-            callback: { proxy, type, event, refcon -> Unmanaged<CGEvent>? in
+            callback: { _, type, event, refcon -> Unmanaged<CGEvent>? in
                 guard let refcon = refcon else {
                     return Unmanaged.passUnretained(event)
                 }
