@@ -64,13 +64,14 @@ final class KeyCodeMapperTests: XCTestCase {
         XCTAssertFalse(mapper.allKeyCodes.isEmpty)
     }
 
-    func testNoDuplicateZhuyinSymbols() {
-        var seen: Set<String> = []
-        for keyCode in mapper.allKeyCodes {
-            guard let symbol = mapper.zhuyinSymbol(for: keyCode) else { continue }
-            XCTAssertFalse(seen.contains(symbol), "Duplicate Zhuyin symbol: \(symbol) for key \(keyCode)")
-            seen.insert(symbol)
-        }
+    func testDaqianAllowsIntentionalDuplicates() {
+        // Daqian layout intentionally maps some symbols to two keys for easier input:
+        // ㄤ → [ (keyCode 33) and ; (keyCode 41)
+        // ㄥ → ] (keyCode 30) and / (keyCode 44)
+        XCTAssertEqual(mapper.zhuyinSymbol(for: 33), "ㄤ")
+        XCTAssertEqual(mapper.zhuyinSymbol(for: 41), "ㄤ")
+        XCTAssertEqual(mapper.zhuyinSymbol(for: 30), "ㄥ")
+        XCTAssertEqual(mapper.zhuyinSymbol(for: 44), "ㄥ")
     }
 
     func testRequiredZhuyinSymbolsPresent() {

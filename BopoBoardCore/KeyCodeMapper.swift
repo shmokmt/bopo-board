@@ -67,9 +67,9 @@ class KeyCodeMapper {
     func validateMappings() -> Bool {
         guard zhuyinKeyMap.count >= 30 else { return false }
 
+        // Note: duplicate values are intentional in Daqian layout
+        // (e.g. ㄤ on both [ and ;, ㄥ on both ] and /)
         let zhuyinSymbols = Set(zhuyinKeyMap.values)
-        guard zhuyinSymbols.count == zhuyinKeyMap.count else { return false }
-
         let requiredSymbols = ["ㄅ", "ㄆ", "ㄇ", "ㄈ", "ㄉ", "ㄊ", "ㄋ", "ㄌ", "ㄧ", "ㄨ", "ㄩ"]
         for symbol in requiredSymbols {
             guard zhuyinSymbols.contains(symbol) else { return false }

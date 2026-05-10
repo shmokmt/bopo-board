@@ -22,8 +22,7 @@ let package = Package(
             dependencies: ["BopoBoardCore"],
             path: "BopoBoard",
             exclude: [
-                "Resources/Assets.xcassets",
-                "Models"
+                "Resources/Assets.xcassets"
             ],
             swiftSettings: [
                 .unsafeFlags(["-parse-as-library"])
