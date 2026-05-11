@@ -9,6 +9,14 @@ import AppKit
 import SwiftUI
 import os.log
 
+/// NSHostingController subclass that suppresses the system beep caused by
+/// unhandled key events when no text field is focused in the popover.
+private class SilentHostingController<Content: View>: NSHostingController<Content> {
+    override func keyDown(with event: NSEvent) {
+        // Do not call super to prevent NSBeep for unhandled key events
+    }
+}
+
 class MenuBarManager: ObservableObject {
     private static let logger = Logger(subsystem: "com.local.BopoBoard", category: "MenuBarManager")
     private var statusItem: NSStatusItem?
@@ -45,7 +53,7 @@ class MenuBarManager: ObservableObject {
         popover = NSPopover()
         popover?.contentSize = NSSize(width: 500, height: 600)
         popover?.behavior = .transient
-        popover?.contentViewController = NSHostingController(
+        popover?.contentViewController = SilentHostingController(
             rootView: MenuBarView(
                 keyboardState: keyboardState,
                 permissionService: permissionService
