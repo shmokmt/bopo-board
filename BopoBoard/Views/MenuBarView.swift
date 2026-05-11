@@ -14,8 +14,6 @@ import BopoBoardCore
 struct MenuBarView: View {
     @ObservedObject var keyboardState: KeyboardState
     @ObservedObject var permissionService: PermissionService
-    var keyboardMonitor: KeyboardMonitor?
-    var menuBarManager: MenuBarManager?
 
     @State private var showSettings = false
 
@@ -67,23 +65,6 @@ struct MenuBarView: View {
                 .fontWeight(.bold)
 
             Spacer()
-
-            // Monitoring toggle
-            if permissionService.hasPermission {
-                Toggle("", isOn: Binding(
-                    get: { keyboardState.isMonitoring },
-                    set: { isOn in
-                        if isOn {
-                            _ = keyboardMonitor?.startMonitoring()
-                        } else {
-                            keyboardMonitor?.stopMonitoring()
-                        }
-                        menuBarManager?.updateIcon(isMonitoring: isOn)
-                    }
-                ))
-                .toggleStyle(.switch)
-                .labelsHidden()
-            }
 
             Button(action: { showSettings.toggle() }, label: {
                 Image(systemName: "gearshape")
@@ -143,9 +124,9 @@ struct MenuBarView: View {
             // Status indicator
             HStack(spacing: 4) {
                 Circle()
-                    .fill(keyboardState.isMonitoring ? Color.green : Color.gray)
+                    .fill(Color.green)
                     .frame(width: 8, height: 8)
-                Text(keyboardState.isMonitoring ? "Monitoring" : "Paused")
+                Text("Active")
                     .font(.caption)
                     .foregroundColor(.secondary)
             }

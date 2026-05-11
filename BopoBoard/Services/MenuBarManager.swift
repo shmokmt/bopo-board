@@ -48,11 +48,17 @@ class MenuBarManager: ObservableObject {
         popover?.contentViewController = NSHostingController(
             rootView: MenuBarView(
                 keyboardState: keyboardState,
-                permissionService: permissionService,
-                keyboardMonitor: keyboardMonitor,
-                menuBarManager: self
+                permissionService: permissionService
             )
         )
+
+        // Start monitoring immediately
+        if let monitor = keyboardMonitor {
+            let started = monitor.startMonitoring()
+            if started {
+                updateIcon(isMonitoring: true)
+            }
+        }
 
         Self.logger.info("Menu bar setup complete")
     }
